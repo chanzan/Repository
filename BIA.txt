@@ -1,0 +1,15 @@
+* 01JUN2017
+Describe -> Characterize Data (statistics)
+Data -> Data Set Attributes (metadata)
+Column Names
+	32 char
+	start letter underscore
+	only letter underscore number
+	no space symbol
+Column Labels
+	display
+	256 char
+	includes space symbols
+Column Type
+	character 32767
+	numeric 8byte 1617sf number currency date 01JAN1960 time seconds from midnight
