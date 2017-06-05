@@ -1,0 +1,41 @@
+>>DATA
+
+Column name: 32 char / start letter underscore / include letter underscore number / no space symbol
+Column label: display / 256 char / include space symbol
+Column type: character 32676 / numeric 8byte 16-17sf / currency / date "01JAN1960"d / time seconds from midnight
+Missing: character blank / numeric period
+Library: 8 char / start letter underscore / include letter underscore number / no space symbol / work temporary
+	Tools -> Assign Project Library
+	access=readonly
+Data grid: Open data / Data shortcut in project / Edit -> Find / Right-click -> {Hold,Hide,Move} / display order
+Import Data task: field names / naming conventions / scan all values in column / column breaks / Modify Task
+	
+>>QUERYING
+
+Menu		-> Tasks / Favourites
+
+Data		-> Data Set Attributes (metadata)
+
+Describe	-> List Data (print)
+Describe	-> Characterize Data (summary statistics)
+Describe	-> Distribution Analysis (variable statistics)
+Describe	-> One-Way Frequencies (counts): analysis variables / group analysis by
+
+>>REPORTING
+
+>>CODE
+
+DROP <variables>;
+#BYVAL(variable)
+options nobyline; options byline;
+
+>>SHORTCUT
+
+F4				Process Flow
+Log message		Go To
+
+Tools -> Options -> Restore Window Layout
+Tools -> Options -> Output Library
+Tools -> Options -> Data General -> Use labels for column names
+Tools -> Options -> Data General -> Automatically open data when added to the project
+Tools -> Options -> Tasks General -> Include SAS procedure titles in results
