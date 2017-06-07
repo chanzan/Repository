@@ -1,41 +1,133 @@
+End Chapter 3 Start Chapter 4 127
+
 >>DATA
 
 Column name: 32 char / start letter underscore / include letter underscore number / no space symbol
-Column label: display / 256 char / include space symbol
-Column type: character 32676 / numeric 8byte 16-17sf / currency / date "01JAN1960"d / time seconds from midnight
+Column label: 256 char / display / include space symbol
+Column type: character value 32767 / numeric value 8byte 16-17sf currency date "01JAN1960"d time seconds from midnight
+Format: control only display not storage
+Informat: read=in format
+Properties: modify label and format / variable name <-> label / data value <-> format
 Missing: character blank / numeric period
 Library: 8 char / start letter underscore / include letter underscore number / no space symbol / work temporary
-	Tools -> Assign Project Library
-	access=readonly
-Data grid: Open data / Data shortcut in project / Edit -> Find / Right-click -> {Hold,Hide,Move} / display order
-Import Data task: field names / naming conventions / scan all values in column / column breaks / Modify Task
+Dataset: open data / data shortcut in project / descriptor (metadata: general and variable properties) and data
+Datagrid: Edit -> Find / Right-click -> {Hold,Hide,Move} / only change display order
+Import Data task: first row field names / rename comply SAS naming conventions truncates 32 replace space symbol / scan all values in column / fixed width column breaks
+
+>>FORMAT
+<$>format<w>.<d>: $ indicate character / SAS format / w total width including decimal character / period syntax / d decimal places
 	
->>QUERYING
+>>TASK
 
 Menu		-> Tasks / Favourites
+Menu		-> Data Explorer (quick statistics): File -> Open -> Data Exploration / Resources Pane -> Data Exploration History
+
+Datagrid	-> Modify Task -> Edit (edit filter input data)
+Datagrid	-> Query Builder -> Advanced Expression (compute, prompt, add and join tables. group, summarize, filter raw and summarized data)
+Datagrid	-> Filter and Sort task -> Advanced Edit (filter and sort)
 
 Data		-> Data Set Attributes (metadata)
 
 Describe	-> List Data (print)
-Describe	-> Characterize Data (summary statistics)
-Describe	-> Distribution Analysis (variable statistics)
+Describe	-> Summary Statistics (wizard, statistics, graphs): Advanced View -> Results -> Specify ways
+Describe	-> Summary Tables (cross-tabulate)
+Describe	-> Characterize Data (overview including frequency, summary statistics, graphs)
+Describe	-> Distribution Analysis (distribution statistics)
 Describe	-> One-Way Frequencies (counts): analysis variables / group analysis by
 
->>REPORTING
+>>OPERATORS
 
->>CODE
+IN: list
+BETWEEN: inclusive
+IS MISSING: IS NULL
+CONTAINS: substring
 
+>>PROMPT
+
+Resources Pane -> Prompt Manager
+Type: Variable / Text (Get Value) / Numeric / Date Range
+Multiple value prompt
+
+>>REPORT
+
+File -> New -> Report
+Format: SAS / HTML / PDF / RTF / Text
+Graph: Right-click -> Open -> Open in Advanced View / Bar Chart task / Pie Chart task: isolate slice
+
+>>PROGRAMMING
+
+DATA
+PROC
+RUN;
+
+/* comment */
+* comment;
+
+%LET path=c:\;
+INFILE "&path";
+
+PROC CONTENTS data=libref._ALL_ NODS; RUN;		*descriptor;
+PROC PRINT data=libref.dataset NOOBS; RUN;		*data;
+LIBNAME libref "SAS-library";					*global no run;
+LIBNAME libref CLEAR;
+
+PROC MEANS SKEWNESS
 DROP <variables>;
 #BYVAL(variable)
 options nobyline; options byline;
+EXPLODE="value"
+MONTH(variable)
+FORMAT variable(s) format.;
+SUBSTRING(variable,position,length)
+SUM(): plus missing equal missing
+YRDIF(start-date,end-date,'age')
+TODAY()
+WHERE variable="&SelectPrompt"
 
 >>SHORTCUT
 
-F4				Process Flow
-Log message		Go To
+Project Tree: dataset / tasks
+Process Flow: Autoexec / link (user-defined dashed, automatic solid): Right-click -> Link to
+Resources Pane: Tasks / SAS Folders / Servers / Prompt Manager / Data Exploration History
 
+F1				Syntax Help
+F3				Run
+F4				Process Flow
+F8				Run
+Log message		Go To
+Ct I			Indenter
+Ct /			Comment
+CtSh /			Uncomment
+
+Ct Space		Autocomplete: pointer
+Ct L			Autocomplete: library
+Ct D			Autocomplete: data
+CtSh F1			Autocomplete: functions
+CtSh F2			Autocomplete: macro
+CtSh F			Autocomplete: format
+CtSh I			Autocomplete: informat
+CtSh K			Autocomplete: statistics keyword
+CtSh C			Autocomplete: colours
+CtSh F4			Autocomplete: style attributes
+CtSh F3			Autocomplete: style elements
+
+View -> Maximize Workspace
+
+Tools -> Assign Project Library (access=readonly)
 Tools -> Options -> Restore Window Layout
-Tools -> Options -> Output Library
+Tools -> Options -> Results General -> Result Formats
+Tools -> Options -> Results General -> Show generated wrapper code in SAS
+Tools -> Options -> Data General -> Naming Options -> Valid variable names to Basic variable names (V7)
 Tools -> Options -> Data General -> Use labels for column names
 Tools -> Options -> Data General -> Automatically open data when added to the project
+Tools -> Options -> Query -> Automatically attempt to join tables in query
 Tools -> Options -> Tasks General -> Include SAS procedure titles in results
+Tools -> Options -> Output Library
+Tools -> Options -> SAS Programs -> Editor Options
+
+>>CLEANUP
+manipulating data
+	using sas functions
+	conditional processing
+combining data sets
+	concatenating data sets
